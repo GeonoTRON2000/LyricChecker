@@ -116,10 +116,10 @@ public class SongGUI implements KeyListener
     {
       if (t.isExplicit()) {
     	  output.setBackground(Color.RED);
-    	  output.setText("No lyrics found, MusixMatch marked as explicit.");
+    	  output.setText("No lyrics found, MusixMatch marked as explicit: "+t.getName()+".");
       } else {
     	  output.setBackground(Color.GREEN);
-    	  output.setText("No lyrics found, MusixMatch marked as clean.");
+    	  output.setText("No lyrics found, MusixMatch marked as clean: "+t.getName()+".");
       }
     }
   }
