@@ -80,23 +80,6 @@ public class LyricChecker {
     str = str.substring(0, feat);
   return str;
  }
-
-
- public void addBWord(String s) {
-  bw.add(s.toLowerCase());
- }
-
- public void removeBWord(String s) {
-  bw.remove(s.toLowerCase());
- }
-
- public void addQWord(String s) {
-  qw.add(s.toLowerCase());
- }
-
- public void removeQWord(String s) {
-  qw.remove(s.toLowerCase());
- }
  
  public ArrayList<String> foundBadWords () {
   return bwc;

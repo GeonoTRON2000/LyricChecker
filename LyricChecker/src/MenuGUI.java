@@ -71,6 +71,16 @@ public class MenuGUI extends JPanel
     });
     panel.add(button3);
     
+    JButton button4 = new JButton("View/Edit Expletive List");
+    button4.setAlignmentX(Component.CENTER_ALIGNMENT);
+    button4.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e)
+     {
+      new SpotifyGUI(badWords, qWords).setVisible(true);
+     }
+    });
+    panel.add(button3);
+    
     panel.add(Box.createRigidArea(new Dimension(0,25)));
     
     JLabel credits = new JLabel("Brandon Liu, Carson Fleming, Marshall Vail");
@@ -113,6 +123,22 @@ public class MenuGUI extends JPanel
       }
     }
     return str;
+  }
+  
+  public void addBWord(String s) {
+    badWords.add(s.toLowerCase());
+  }
+  
+  public void removeBWord(String s) {
+    badWords.remove(s.toLowerCase());
+  }
+  
+  public void addQWord(String s) {
+    qWords.add(s.toLowerCase());
+  }
+  
+  public void removeQWord(String s) {
+    qWords.remove(s.toLowerCase());
   }
   
   public static void main(String[] args)
