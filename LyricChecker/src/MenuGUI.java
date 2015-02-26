@@ -1,14 +1,12 @@
-
 import java.awt.*;
-import java.applet.Applet;
 import javax.swing.*;
-import java.awt.Frame;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MenuGUI extends JPanel
 {
+  private static final long serialVersionUID = 4552711288895606017L;
   private ArrayList<String> badWords;
   private ArrayList<String> qWords;
   
@@ -36,13 +34,14 @@ public class MenuGUI extends JPanel
     
     panel.add(label);
     
-    panel.add(Box.createRigidArea(new Dimension(0,100)));
+    panel.add(Box.createRigidArea(new Dimension(0,50)));
+    
     JButton button1 = new JButton("Check Artist/Song");
     button1.setAlignmentX(Component.CENTER_ALIGNMENT);
     button1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
-        SongGUI s = new SongGUI(badWords, qWords);
+    	  new SongGUI(badWords, qWords);
       }
     });   
     panel.add(button1);
@@ -54,10 +53,22 @@ public class MenuGUI extends JPanel
     button2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
-        AlbumGUI a = new AlbumGUI(badWords, qWords);
+        new AlbumGUI(badWords, qWords);
       }
     });   
     panel.add(button2);
+    
+    panel.add(Box.createRigidArea(new Dimension(0,50)));
+    
+    JButton button3 = new JButton("Check Spotify ID(s)");
+    button3.setAlignmentX(Component.CENTER_ALIGNMENT);
+    button3.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e)
+    	{
+    		new SpotifyGUI(badWords, qWords).setVisible(true);
+    	}
+    });
+    panel.add(button3);
     
     panel.add(Box.createRigidArea(new Dimension(0,50)));
     
@@ -76,6 +87,6 @@ public class MenuGUI extends JPanel
   
   public static void main(String[] args)
   {
-    MenuGUI main = new MenuGUI();
+	new MenuGUI();
   }
 }

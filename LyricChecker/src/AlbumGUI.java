@@ -1,14 +1,11 @@
 import java.awt.*;
-import java.applet.Applet;
 import javax.swing.*;
-import java.awt.Frame;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.io.IOException;
 import musixmatch.*;
 
-public class AlbumGUI extends JPanel implements KeyListener, ActionListener
+public class AlbumGUI implements KeyListener
 {
   private JTextField artistField;
   private JTextField albumField;
@@ -95,16 +92,12 @@ public class AlbumGUI extends JPanel implements KeyListener, ActionListener
         output.append(t.getName());
         if (t.isExplicit()) 
         {
-          output.append(" [Explicit]");
-          LyricChecker lc = new LyricChecker(artistField.getText(), t.getName(), badWords, qWords);
-          output.setText(null);
-          output.append(lc.getBadWordsOutput());
+          LyricChecker lc = new LyricChecker(t.getName(), t.getArtist(), badWords, qWords);
+          if (lc.hasBadWords()) output.append(" [Bad Words]");
+          else if (lc.hasQWords()) output.append(" [Questionable]");
+          else output.append(" [Clean]");
         }
         else {
-//          LyricChecker lc = new LyricChecker(artistField.getText(), t.getName(), badWords, qWords);
-//          if (lc.hasBadWords()) output.append(" [Dirty]");
-//          else if (lc.hasQWords()) output.append(" [Questionable]");
-//          else 
           output.append(" [Clean]");
         }
         output.append("\r\n");
@@ -114,7 +107,6 @@ public class AlbumGUI extends JPanel implements KeyListener, ActionListener
       e.printStackTrace();
     }
   }
-  public void actionPerformed(ActionEvent e) {}
   public void keyTyped(KeyEvent e) {}
   public void keyReleased(KeyEvent e) {}
 }

@@ -1,14 +1,9 @@
 import java.awt.*;
-import java.applet.Applet;
 import javax.swing.*;
-import java.awt.Frame;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.io.IOException;
-import musixmatch.*;
 
-public class SongGUI extends JPanel implements KeyListener, ActionListener
+public class SongGUI implements KeyListener
 {
   private JTextField artistField;
   private JTextField songField;
@@ -87,11 +82,10 @@ public class SongGUI extends JPanel implements KeyListener, ActionListener
   {
     output.setText(null);
     LyricChecker l = new LyricChecker(artistField.getText(), songField.getText(), badWords, qWords);
-    if(l.getSong() != null && l.getArtist() != null && l.getBadWordsOutput() != null)
+    l.checkLyrics();
+    if(l.found())
     {
-      String bad = l.getBadWordsOutput();
-      //int indexQ = bad.indexOf("Questionable");
-      output.append(l.getSong() + " by " + l.getArtist() + "\n" + bad);
+      output.setText("Bad Words: "+l.foundBadWords()+"\r\n"+"Questionable Words: "+l.foundQWords());
       if(!l.hasBadWords() && !l.hasQWords())
         output.setBackground(Color.GREEN);
       else if(l.hasQWords() && !l.hasBadWords())
@@ -107,7 +101,6 @@ public class SongGUI extends JPanel implements KeyListener, ActionListener
     
   }
   
-  public void actionPerformed(ActionEvent e) {}
   public void keyTyped(KeyEvent e) {}
   public void keyReleased(KeyEvent e) {}
 }

@@ -39,7 +39,7 @@ public class MusixMatch {
 		if (tracklist.size() <= 0) return null;
 		JSONObject first = tracklist.getObject(0).getObject("track");
 		int trackid = (int)first.getNumber("track_id").getValue();
-		return new Track(first.getString("track_name").getValue(), trackid, lyrics(trackid));
+		return new Track(first.getString("track_name").getValue(), first.getString("artist_name").getValue(), trackid, lyrics(trackid));
 	}
 	
 	// Extract the album ID from an object.
@@ -82,7 +82,7 @@ public class MusixMatch {
 		for (int i = 0; i < tracksList.size(); i++) {
 			JSONObject trackObject = tracksList.getObject(i).getObject("track");
 			int trackid = (int)trackObject.getNumber("track_id").getValue();
-			tracks[i] = new Track(trackObject.getString("track_name").getValue(), trackid, lyrics(trackid));
+			tracks[i] = new Track(trackObject.getString("track_name").getValue(), trackObject.getString("artist_name").getValue(), trackid, lyrics(trackid));
 		}
 		return new Playlist(albumName, tracks);
 	}
