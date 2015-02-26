@@ -121,8 +121,6 @@ public class SongGUI implements KeyListener
     	  output.setBackground(Color.GREEN);
     	  output.setText("No lyrics found, MusixMatch marked as clean.");
       }
-      output.setBackground(Color.WHITE);
-      output.append("No such song.");
     }
   }
   
