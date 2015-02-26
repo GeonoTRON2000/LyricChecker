@@ -85,16 +85,32 @@ public class MenuGUI extends JPanel
     frame.setVisible(true);
   }
  
-  public static String makeLevel(String str) //make string uniform length of 50 characters by truncating or adding spaces
+  public static String makeLevelLeft(String str) //make string 35 characters by truncating or adding spaces
   {
-    if(str.length() > 50)
+    if(str.length() > 35)
     {
-      str = str.substring(0, 46) + "... ";
+      str = str.substring(0, 31) + "... ";
     }
     else
     {
-      while(str.length() < 46)
-        str += (" ");
+      while(str.length() < 35)
+        str += ' ';
+    }
+    return str;
+  }
+  
+  public static String makeLevelRight(String str) //make string 15 characters by truncating or adding spaces
+  {
+    if (str.length() > 15)
+    {
+      str = str.substring(0, 11) + "... ";
+    }
+    else
+    {
+      while (str.length() < 15)
+      {
+        str = ' ' + str;
+      }
     }
     return str;
   }

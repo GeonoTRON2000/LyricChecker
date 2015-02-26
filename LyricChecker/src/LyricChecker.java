@@ -6,7 +6,6 @@ import musixmatch.URLConnectionReader;
 public class LyricChecker {
  private String name;
  private String artist;
- private boolean found;
  private ArrayList<String> bwc;
  private ArrayList<String> qwc;
  private ArrayList<String> bw;
@@ -16,7 +15,6 @@ public class LyricChecker {
  public LyricChecker (String n, String a, ArrayList<String> bWords, ArrayList<String> qWords) {
   name = n;
   artist = a;
-  found = false;
   bw = bWords;
   qw = qWords;
   bwc = new ArrayList<String>();
@@ -31,7 +29,6 @@ public class LyricChecker {
     lookupFailed = true;
     return;
   }
-  found = true;
   for(int i = 0; i < bw.size(); i++) {
    String cbw = bw.get(i);
    if (lyrics.indexOf(cbw) > -1) bwc.add(cbw);
@@ -47,14 +44,9 @@ public class LyricChecker {
   }
  }
  
- public boolean found () 
- {
-  return found;
- }
- 
  public static String metroLookup (String song, String artist) 
  {
-     try {
+   try {
      String html = URLConnectionReader.getText("http://www.metrolyrics.com/printlyric/"+processMetro(song)+"-lyrics-"+processMetro(artist)+".html");
      Scanner scan = new Scanner(html);
      scan.useDelimiter("<p class=\"lyrics-body\"><p class='verse'>");
@@ -86,7 +78,6 @@ public class LyricChecker {
   int feat = str.indexOf("-feat");
   if(feat > 0)
     str = str.substring(0, feat);
-  System.out.println(str);
   return str;
  }
 
@@ -126,13 +117,5 @@ public class LyricChecker {
  public boolean lookupFailed(){
    return lookupFailed;
  }
- public static void main(String[] args)
- {
-   try{
-   System.out.println(URLConnectionReader.getText("http://www.metrolyrics.com/printlyric/windowsill-lyrics-arcade-fire.html"));
-   }
-   catch(IOException e){
-     System.out.println("failed");
-   }
- }
+
 }

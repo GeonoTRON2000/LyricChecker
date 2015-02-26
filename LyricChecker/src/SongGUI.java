@@ -1,6 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
+
+import musixmatch.MusixMatch;
+import musixmatch.Track;
+
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SongGUI implements KeyListener
@@ -81,12 +86,25 @@ public class SongGUI implements KeyListener
   }
   public void runSongCheck() 
   {
-    output.setText(null);
-    LyricChecker l = new LyricChecker(songField.getText(), artistField.getText(), badWords, qWords);
+    output.setText("");
+    Track t = null;
+    try {
+      t = MusixMatch.trackSearch(songField.getText(), artistField.getText());
+    } catch (IOException e) {
+      output.setBackground(Color.WHITE);
+	  output.append("No such song.");
+	  return;
+    }
+    if (t == null) {
+      output.setBackground(Color.WHITE);
+  	  output.append("No such song.");
+  	  return;    	
+    }
+    LyricChecker l = new LyricChecker(t.getName(), t.getArtist(), badWords, qWords);
     l.checkLyrics();
-    if(l.found())
+    if(!l.lookupFailed())
     {
-      output.setText("Expletives:\n"+l.foundBadWords()+"\r\n\n"+"Possible expletives:\n"+l.foundQWords());
+      output.setText("Expletives:\r\n"+l.foundBadWords()+"\r\n\r\n"+"Possible expletives:\r\n"+l.foundQWords());
       if(!l.hasBadWords() && !l.hasQWords())
         output.setBackground(Color.GREEN);
       else if(l.hasQWords() && !l.hasBadWords())
@@ -96,10 +114,16 @@ public class SongGUI implements KeyListener
     }
     else
     {
+      if (t.isExplicit()) {
+    	  output.setBackground(Color.RED);
+    	  output.setText("No lyrics found, MusixMatch marked as explicit.");
+      } else {
+    	  output.setBackground(Color.GREEN);
+    	  output.setText("No lyrics found, MusixMatch marked as clean.");
+      }
       output.setBackground(Color.WHITE);
       output.append("No such song.");
     }
-    
   }
   
   public void keyTyped(KeyEvent e) {}

@@ -35,7 +35,7 @@ public class Track {
 	public String getLyrics () {
 		return lyrics.getLyrics();
 	}
-	
+		
 	public String toString () {
 		return getName();
 	}

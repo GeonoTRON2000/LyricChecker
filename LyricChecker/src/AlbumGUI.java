@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.io.IOException;
 import musixmatch.*;
-import javax.swing.text.BadLocationException;
 
 //we should make it show something in the output when the 
 //"MusixMatchExeption: Api lookup did not return successfully:404" instead of it just being blank
@@ -96,27 +95,13 @@ public class AlbumGUI implements KeyListener
       }
 
       for (Track t : album) {
-        output.append(MenuGUI.makeLevel(t.getName())); 
-        // diagnostic info
-        System.out.println("\n" + t.getName() + " musixmatch explicit? " + t.isExplicit());
-        // diagnostic info
-        if (t.isExplicit()) 
-        {
-          LyricChecker lc = new LyricChecker(t.getName(), t.getArtist(), badWords, qWords);
-          lc.checkLyrics();
-          // diagnostic info
-          System.out.println("lookupFailed? " + lc.lookupFailed());
-          System.out.println(lc.foundBadWords());
-          System.out.println(lc.foundQWords());
-          // diagnostic info
-          if (lc.hasBadWords()) output.append(" [Explicit]");
-          else if (lc.hasQWords()) output.append(" [Questionable]");
-          else if (lc.lookupFailed()) output.append(" [Explicit]"); //make song not found 
-          else output.append(" [Clean]");
-        }
-        else {
-          output.append(" [Clean]");     //musixmatch doesn't consider "nigga" to make a song explicit... make metroCheck 'clean' songs too?
-        }
+        output.append(MenuGUI.makeLevelLeft(t.getName())); 
+        LyricChecker lc = new LyricChecker(t.getName(), t.getArtist(), badWords, qWords);
+        lc.checkLyrics();
+        if (lc.hasBadWords()) output.append(MenuGUI.makeLevelRight("[Explicit]"));
+        else if (lc.hasQWords()) output.append(MenuGUI.makeLevelRight("[Questionable]"));
+        else if (lc.lookupFailed()) output.append(MenuGUI.makeLevelRight(t.isExplicit() ? "[Explicit]" : "[Clean]"));
+        else output.append(MenuGUI.makeLevelRight("[Clean]"));
         output.append("\r\n");
       }
 //      try{    //trying to remove last blank line, doesn't work

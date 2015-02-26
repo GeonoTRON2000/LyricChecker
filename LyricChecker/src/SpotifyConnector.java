@@ -32,16 +32,20 @@ public class SpotifyConnector {
 		if (!type.getValue().equals("track")) return null;
 		JSONObject tdata = result.getObject("track");
 		JSONArray artists = tdata.getArray("artists");
-		if (artists.size() <= 0) return null;
-		JSONObject artist = artists.getObject(0);
-		return MusixMatch.trackSearch(tdata.getString("name").getValue(), artist.getString("name").getValue());
+		String tn = tdata.getString("name").getValue();
+		Track t = null;
+		for (int i = 0; i < artists.size(); i++) {
+			t = MusixMatch.trackSearch(tn, artists.getObject(i).getString("name").getValue());
+			if (t != null) break;
+		}
+		return null;
 	}
 	
 	// Do the same as above with an album.
 	public static Playlist getAlbum (String url) throws IOException {
 		JSONObject result = apiLookup(url);
-		JSONString type = result.getObject("info").getString("album");
-		if (!type.getValue().equals("track")) return null;
+		JSONString type = result.getObject("info").getString("type");
+		if (!type.getValue().equals("album")) return null;
 		JSONObject data = result.getObject("album");
 		return MusixMatch.albumSearch(data.getString("name").getValue(), data.getString("artist").getValue());
 	}
