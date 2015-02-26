@@ -15,6 +15,11 @@ public class JSONParser {
 	}
 	
 	public JSONObject object () throws IOException {
+		// Parse the following syntax:
+		// {
+		//   "string" : value,
+		//   ...
+		// }
 		if (tokenizer.pop() != JSONToken.LCURLY) throw new JSONParseException("That's not an object.");
 		JSONObject object = new JSONObject();
 		while (tokenizer.peek() != JSONToken.RCURLY) {
@@ -30,6 +35,8 @@ public class JSONParser {
 	}
 	
 	public JSONArray array () throws IOException {
+		// Parse the following syntax:
+		// [value1, value2, ...]
 		if (tokenizer.pop() != JSONToken.LSQUARE) throw new JSONParseException("That's not an array.");
 		JSONArray array = new JSONArray();
 		while (tokenizer.peek() != JSONToken.RSQUARE) {
@@ -42,6 +49,7 @@ public class JSONParser {
 	}
 	
 	public JSONString string() throws IOException {
+		// Parse a string (which we've already parsed in the tokenizer.)
 		if (tokenizer.peek() != JSONToken.STRING) throw new JSONParseException("That's not a string.");
 		JSONString string = new JSONString((String)tokenizer.peekValue());
 		tokenizer.pop();
@@ -49,13 +57,15 @@ public class JSONParser {
 	}
 	
 	public JSONNumber number () throws IOException {
+		// Parse a double (which we've already parsed in the tokenizer.)
 		if (tokenizer.peek() != JSONToken.NUMBER) throw new JSONParseException("That's not a number.");
 		JSONNumber number = new JSONNumber((Double)tokenizer.peekValue());
 		tokenizer.pop();
 		return number;
 	}
 	
-	public JSONBoolean bool() throws IOException {
+	public JSONBoolean bool () throws IOException {
+		// Parse a boolean, which was already done in the tokenizer.
 		JSONToken t = tokenizer.pop();
 		if (t == JSONToken.TRUE) return new JSONBoolean(true);
 		else if (t == JSONToken.FALSE) return new JSONBoolean(false);
@@ -64,12 +74,12 @@ public class JSONParser {
 	
 	public JSONValue value () throws IOException {
 		JSONToken t = tokenizer.peek();
-		if (t == JSONToken.LCURLY) return object();
-		else if (t == JSONToken.LSQUARE) return array();
-		else if (t == JSONToken.STRING) return string();
-		else if (t == JSONToken.NUMBER) return number();
-		else if (t == JSONToken.TRUE || t == JSONToken.FALSE) return bool();
-		else if (t == JSONToken.NULL) return null;
+		if (t == JSONToken.LCURLY) return object(); // If it starts with {, parse an object.
+		else if (t == JSONToken.LSQUARE) return array(); // If it starts with [, parse an array.
+		else if (t == JSONToken.STRING) return string(); // If it's a string, parse a string.
+		else if (t == JSONToken.NUMBER) return number(); // If it's a double, parse a double.
+		else if (t == JSONToken.TRUE || t == JSONToken.FALSE) return bool(); // If it's true or false, return a boolean.
+		else if (t == JSONToken.NULL) return null; // If null, return null.
 		else throw new JSONParseException("Expected a value.");
 	}
 

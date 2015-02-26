@@ -1,6 +1,8 @@
 package musixmatch;
 import java.util.Iterator;
 
+// An iterable list of tracks with
+// a name, AKA an album or a playlist.
 public class Playlist implements Iterable<Track>, Iterator<Track> {
 	private String name;
 	private Track[] tracks;

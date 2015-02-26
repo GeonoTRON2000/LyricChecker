@@ -1,6 +1,9 @@
 package json;
 import java.util.HashMap;
 
+// Stores a HashMap of string keys mapped
+// to JSONValue values. Can get any subtype
+// of JSONValue by string key.
 public class JSONObject extends JSONValue {
 	private HashMap<String, JSONValue> data;
 	

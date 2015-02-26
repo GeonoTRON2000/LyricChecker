@@ -1,5 +1,6 @@
 package json;
 
+// Holds a double and is a JSONValue.
 public class JSONNumber extends JSONValue {
 	private double d;
 	

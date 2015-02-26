@@ -15,13 +15,17 @@ public class SpotifyConnector {
 	private static String buildAPIUrl (String url) throws UnsupportedEncodingException {
 		return "http://ws.spotify.com/lookup/1/.json?uri="+URLEncoder.encode(url, "UTF-8");
 	}
-	
+
+	// Parse API response into a JSONObject.
 	private JSONObject apiLookup (String url) throws IOException {
 		String json = URLConnectionReader.getText(buildAPIUrl(url));
 		JSONParser p = new JSONParser(json);
 		return p.object();
 	}
 	
+	// Find the track at a given Spotify URL,
+	// then take the name and artist and search
+	// them in MusixMatch.
 	public Track getTrack (String url) throws IOException {
 		JSONObject result = apiLookup(url);
 		JSONString type = result.getObject("info").getString("type");
@@ -33,6 +37,7 @@ public class SpotifyConnector {
 		return MusixMatch.trackSearch(tdata.getString("name").getValue(), artist.getString("name").getValue());
 	}
 	
+	// Do the same as above with an album.
 	public Playlist getAlbum (String url) throws IOException {
 		JSONObject result = apiLookup(url);
 		JSONString type = result.getObject("info").getString("album");

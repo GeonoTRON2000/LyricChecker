@@ -1,5 +1,8 @@
 package musixmatch;
 
+// Hold the lyrics returned by
+// MusixMatch and whether or not
+// they are explicit.
 public class Lyrics {
 	private String lyrics;
 	private boolean explicit;

@@ -1,5 +1,8 @@
 package musixmatch;
 
+// Hold the name, MusixMatch
+// ID, and Lyrics object of
+// a given track.
 public class Track {
 	private String name;
 	private int id;

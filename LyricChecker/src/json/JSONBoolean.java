@@ -1,5 +1,6 @@
 package json;
 
+// Holds a boolean and extends JSONValue.
 public class JSONBoolean extends JSONValue {
 	private boolean value;
 	

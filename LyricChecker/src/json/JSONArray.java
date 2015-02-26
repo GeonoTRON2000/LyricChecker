@@ -2,6 +2,9 @@ package json;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+// Holds an ArrayList of JSONValues, and
+// is a JSONValue in itself. Can get any
+// subtype of JSONValue by index.
 public class JSONArray extends JSONValue implements Iterable<JSONValue> {
 	private ArrayList<JSONValue> values;
 	

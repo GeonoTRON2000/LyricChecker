@@ -1,5 +1,6 @@
 package json;
 
+// Holds a String and extends JSONValue.
 public class JSONString extends JSONValue {
 	private String value;
 	

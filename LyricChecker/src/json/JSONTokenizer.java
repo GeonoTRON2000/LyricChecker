@@ -3,6 +3,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+// Creates a sort of "stack" of tokens
+// that can be parsed out of an input
+// stream.
+
+// DISCLAIMER: This is not an actual
+//             stack, it just emulates
+//             one.
 public class JSONTokenizer {
 	private InputStream input;
 	private JSONToken lastToken;
@@ -33,9 +40,9 @@ public class JSONTokenizer {
 		int unicodeNumber = 0;
 		boolean reserved = false;
 		while (true) {
-			char c = (char) input.read();
+			char c = (char) input.read(); // Get the next character from the input stream.
 			
-			if (number && !(c >= '0' && c <= '9') && !(c == '.' && dpt <= 0)) {
+			if (number && !(c >= '0' && c <= '9') && !(c == '.' && dpt <= 0)) { // Break out of parsing a number.
 				input.reset();
 				number = false;
 				lastToken = JSONToken.NUMBER;
@@ -45,7 +52,7 @@ public class JSONTokenizer {
 				return;				
 			}
 			
-			if (reserved && !((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
+			if (reserved && !((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) { // Break out of parsing either true, false, or null.
 				input.reset();
 				reserved = false;
 				if (lastValue.equals("true")) lastToken = JSONToken.TRUE;
@@ -55,18 +62,18 @@ public class JSONTokenizer {
 				return;				
 			}
 			
-			if (string) {
-				input.mark(1);
-				if (unicode > 0) {
+			if (string) { // If we're currently parsing a string.
+				input.mark(1); // Allow us to backtrack once we parse the entire string.
+				if (unicode > 0) { // if we're currently parsing a \\u, which should be followed by 4 hex digits
 					unicodeNumber = unicodeNumber*16 + hexdigit(c);
 					if (unicode++ == 4) {
-						lastValue = ((String)lastValue)+((char)unicodeNumber);
+						lastValue = ((String)lastValue)+((char)unicodeNumber); // append the appropriate unicode character
 						unicode = 0;
 						unicodeNumber = 0;
 					}
 					continue;
 				}
-				if (escape) {
+				if (escape) { // If we parsed a \\ character previously.
 					escape = false;
 					switch (c) {
 					case '"':
@@ -102,24 +109,24 @@ public class JSONTokenizer {
 					continue;
 				}
 				if (c == '\\') escape = true;
-				else if (c == '\n') throw new JSONTokenException('\n');
-				else if (c == '"') {
+				else if (c == '\n') throw new JSONTokenException('\n'); // No line breaks in the middle of strings.
+				else if (c == '"') { // Stop parsing the string.
 					if (unicode > 0) throw new JSONTokenException('"');
 					string = false;
 					lastToken = JSONToken.STRING;
 					input.reset();
 					return;
-				} else lastValue = ((String)lastValue)+c;
+				} else lastValue = ((String)lastValue)+c; // In the normal case, append the current character.
 				continue;
 			}
-			if (c == '"') {
+			if (c == '"') { // Start parsing a string.
 				input.mark(1);
 				string = true;
 				lastValue = "";
 				continue;
 			}
 			
-			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) { // Start parsing either an identifier string.
 				input.mark(1);
 				if (!reserved) {
 					reserved = true;
@@ -129,29 +136,30 @@ public class JSONTokenizer {
 				continue;
 			}
 			
-			if (c == '-') {
+			if (c == '-') { // We're about to parse a negative number.
 				input.mark(1);
 				negative = !negative;
 				continue;
 			}
-			if (c >= '0' && c <= '9') {
+			if (c >= '0' && c <= '9') { // Start parsing a number.
 				input.mark(1);
 				if (!number) {
 					number = true;
 					lastValue = new Double(0);
 				}
-				if (dpt > 0) {
+				if (dpt > 0) { // We've already seen a decimal point.
 					lastValue = ((Double)lastValue)+(((double)(c-'0'))/Math.pow(10, dpt));
 					dpt++;
 				} else lastValue = ((Double)lastValue)*10+(c-'0');
 				continue;
 			}
-			if (c == '.' && number && dpt <= 0) {
+			if (c == '.' && number && dpt <= 0) { // If we're seeing a decimal point for the first time.
 				input.mark(1);
 				dpt++;
 				continue;
 			}
 			
+			// Miscellaneous single-character tokens.
 			lastValue = null;
 			switch (c) {
 			case '{':

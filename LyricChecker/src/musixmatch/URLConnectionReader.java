@@ -6,6 +6,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 // credit: Joseph Weissman http://stackoverflow.com/questions/4328711/read-url-to-string-in-few-lines-of-java-code
+// Read text directly from a URL.
 
 public class URLConnectionReader {
 
