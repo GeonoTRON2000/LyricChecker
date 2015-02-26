@@ -1,7 +1,8 @@
 package json;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class JSONArray extends JSONValue {
+public class JSONArray extends JSONValue implements Iterable<JSONValue> {
 	private ArrayList<JSONValue> values;
 	
 	public JSONArray () {
@@ -53,4 +54,9 @@ public class JSONArray extends JSONValue {
 	public String toString () {
 		return values.toString();
 	}
+	
+	public Iterator<JSONValue> iterator () {
+		return values.iterator();
+	}
+	
 }
