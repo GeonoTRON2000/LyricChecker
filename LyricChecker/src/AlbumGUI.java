@@ -4,6 +4,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.io.IOException;
 import musixmatch.*;
+import javax.swing.text.BadLocationException;
+
 
 public class AlbumGUI implements KeyListener
 {
@@ -50,12 +52,13 @@ public class AlbumGUI implements KeyListener
     
     p.add(Box.createRigidArea(new Dimension(0,10)));
     
-    JLabel info = new JLabel("Input artist & album and press enter");
+    JLabel info = new JLabel("Input artist & album and press enter.");
     info.setAlignmentX(Component.CENTER_ALIGNMENT);
     p.add(info);
     p.add(Box.createRigidArea(new Dimension(0,3))); 
     
     output = new JTextArea();
+    output.setFont(new Font("monospaced", Font.PLAIN, 14));
     output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     output.setLineWrap(true);
     output.setWrapStyleWord(true);
@@ -76,6 +79,7 @@ public class AlbumGUI implements KeyListener
     { 
       output.setBackground(Color.WHITE);
       runAlbumCheck();
+      output.setCaretPosition(0);
       albumField.requestFocusInWindow();
       albumField.selectAll();
     }
@@ -88,21 +92,39 @@ public class AlbumGUI implements KeyListener
         output.setText("No such album.");
         return;
       }
+
       for (Track t : album) {
-        output.append(t.getName());
+        output.append(MenuGUI.makeLevel(t.getName())); 
+        // diagnostic info
+        System.out.println("\n" + t.getName() + " musixmatch explicit? " + t.isExplicit());
+        // diagnostic info
         if (t.isExplicit()) 
         {
           LyricChecker lc = new LyricChecker(t.getName(), t.getArtist(), badWords, qWords);
-          if (lc.hasBadWords()) output.append(" [Bad Words]");
+          lc.checkLyrics();
+          // diagnostic info
+          System.out.println("lookupFailed? " + lc.lookupFailed());
+          System.out.println(lc.foundBadWords());
+          System.out.println(lc.foundQWords());
+          // diagnostic info
+          if (lc.hasBadWords()) output.append(" [Explicit]");
           else if (lc.hasQWords()) output.append(" [Questionable]");
+          else if (lc.lookupFailed()) output.append(" [Explicit]"); //make song not found 
           else output.append(" [Clean]");
         }
         else {
-          output.append(" [Clean]");
+          output.append(" [Clean]");     //musixmatch doesn't consider "nigga" to make a song explicit... make metroCheck 'clean' songs too?
         }
         output.append("\r\n");
-   
       }
+//      try{    //trying to remove last blank line, doesn't work
+//      int numLines = output.getLineCount();
+//      output.replaceRange("", output.getLineEndOffset(numLines-2), output.getLineStartOffset(numLines-1));
+//      }
+//      catch(BadLocationException e) {
+//        System.out.println("sucks");
+//        return;
+//      }
     } catch (IOException e) {
       e.printStackTrace();
     }

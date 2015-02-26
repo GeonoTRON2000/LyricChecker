@@ -53,6 +53,7 @@ public class SongGUI implements KeyListener
     p.add(Box.createRigidArea(new Dimension(0,3))); 
     
     output = new JTextArea();
+    output.setFont(new Font("monospaced", Font.PLAIN, 14));
     output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     output.setLineWrap(true);
     output.setWrapStyleWord(true);
@@ -62,7 +63,7 @@ public class SongGUI implements KeyListener
     p.add(pane);
     
     as.add(p);
-    as.setSize(400,225);
+    as.setSize(400,245);
     as.setLocationRelativeTo(null);
     as.setVisible(true);  
   }
@@ -81,11 +82,11 @@ public class SongGUI implements KeyListener
   public void runSongCheck() 
   {
     output.setText(null);
-    LyricChecker l = new LyricChecker(artistField.getText(), songField.getText(), badWords, qWords);
+    LyricChecker l = new LyricChecker(songField.getText(), artistField.getText(), badWords, qWords);
     l.checkLyrics();
     if(l.found())
     {
-      output.setText("Bad Words: "+l.foundBadWords()+"\r\n"+"Questionable Words: "+l.foundQWords());
+      output.setText("Expletives:\n"+l.foundBadWords()+"\r\n\n"+"Possible expletives:\n"+l.foundQWords());
       if(!l.hasBadWords() && !l.hasQWords())
         output.setBackground(Color.GREEN);
       else if(l.hasQWords() && !l.hasBadWords())
@@ -96,7 +97,7 @@ public class SongGUI implements KeyListener
     else
     {
       output.setBackground(Color.WHITE);
-      output.append("URL invalid/Song not found.");
+      output.append("No such song.");
     }
     
   }

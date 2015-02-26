@@ -30,25 +30,26 @@ public class MenuGUI extends JPanel
     label.setAlignmentX(Component.CENTER_ALIGNMENT);
     label.setBorder(BorderFactory.createTitledBorder("4.20"));
     
-    panel.add(Box.createRigidArea(new Dimension(0,50)));
+    panel.add(Box.createRigidArea(new Dimension(0,32)));
     
     panel.add(label);
     
-    panel.add(Box.createRigidArea(new Dimension(0,50)));
+    panel.add(Box.createRigidArea(new Dimension(0,35)));
     
-    JButton button1 = new JButton("Check Artist/Song");
+    JButton button1 = new JButton("Check by Artist/Song");
     button1.setAlignmentX(Component.CENTER_ALIGNMENT);
     button1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
-    	  new SongGUI(badWords, qWords);
+       new SongGUI(badWords, qWords);
       }
     });   
     panel.add(button1);
+    button1.setFocusPainted(false);
     
-    panel.add(Box.createRigidArea(new Dimension(0,50)));
+    panel.add(Box.createRigidArea(new Dimension(0,35)));
     
-    JButton button2 = new JButton("Check Artist/Album");
+    JButton button2 = new JButton("Check by Artist/Album");
     button2.setAlignmentX(Component.CENTER_ALIGNMENT);
     button2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
@@ -58,35 +59,48 @@ public class MenuGUI extends JPanel
     });   
     panel.add(button2);
     
-    panel.add(Box.createRigidArea(new Dimension(0,50)));
+    panel.add(Box.createRigidArea(new Dimension(0,35)));
     
-    JButton button3 = new JButton("Check Spotify ID(s)");
+    JButton button3 = new JButton("Check by Spotify URI");
     button3.setAlignmentX(Component.CENTER_ALIGNMENT);
     button3.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent e)
-    	{
-    		new SpotifyGUI(badWords, qWords).setVisible(true);
-    	}
+     public void actionPerformed(ActionEvent e)
+     {
+      new SpotifyGUI(badWords, qWords).setVisible(true);
+     }
     });
     panel.add(button3);
     
-    panel.add(Box.createRigidArea(new Dimension(0,50)));
+    panel.add(Box.createRigidArea(new Dimension(0,30)));
     
     JLabel credits = new JLabel("Brandon Liu, Carson Fleming, Marshall Vail");
-    credits.setFont(label.getFont ().deriveFont (5.0f));
+    credits.setFont(label.getFont ().deriveFont (10.0f));
     credits.setAlignmentX(Component.CENTER_ALIGNMENT);
     panel.add(credits);
     
     frame.add(panel);
-    frame.setSize(400,400);
+    frame.setSize(300,360);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
   }
  
+  public static String makeLevel(String str) //make string uniform length of 50 characters by truncating or adding spaces
+  {
+    if(str.length() > 50)
+    {
+      str = str.substring(0, 46) + "... ";
+    }
+    else
+    {
+      while(str.length() < 46)
+        str += (" ");
+    }
+    return str;
+  }
   
   public static void main(String[] args)
   {
-	new MenuGUI();
+    new MenuGUI();
   }
 }
