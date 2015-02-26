@@ -6,6 +6,8 @@ import java.io.IOException;
 import musixmatch.*;
 import javax.swing.text.BadLocationException;
 
+//we should make it show something in the output when the 
+//"MusixMatchExeption: Api lookup did not return successfully:404" instead of it just being blank
 
 public class AlbumGUI implements KeyListener
 {
@@ -68,7 +70,7 @@ public class AlbumGUI implements KeyListener
     p.add(pane);
     
     as.add(p);
-    as.setSize(400,300);
+    as.setSize(520,300);
     as.setLocationRelativeTo(null);
     as.setVisible(true);  
   }
