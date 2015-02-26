@@ -71,7 +71,7 @@ public class MenuGUI extends JPanel
     });
     panel.add(button3);
     
-    panel.add(Box.createRigidArea(new Dimension(0,30)));
+    panel.add(Box.createRigidArea(new Dimension(0,25)));
     
     JLabel credits = new JLabel("Brandon Liu, Carson Fleming, Marshall Vail");
     credits.setFont(label.getFont ().deriveFont (10.0f));
