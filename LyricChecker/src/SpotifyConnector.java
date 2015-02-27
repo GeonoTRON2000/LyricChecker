@@ -38,7 +38,7 @@ public class SpotifyConnector {
 			t = MusixMatch.trackSearch(tn, artists.getObject(i).getString("name").getValue());
 			if (t != null) break;
 		}
-		return null;
+		return t;
 	}
 	
 	// Do the same as above with an album.

@@ -92,7 +92,7 @@ public class SpotifyGUI extends JFrame implements KeyListener {
 		try {
 			String out = "";
 			Track t = SpotifyConnector.getTrack(id);
-			if (t == null) return MenuGUI.makeLevelLeft(id)+MenuGUI.makeLevelRight("[Failed]")+"\r\n"; 
+			if (t == null) return MenuGUI.makeLevelLeft(id)+MenuGUI.makeLevelRight("[Not Found]")+"\r\n"; 
 			out += MenuGUI.makeLevelLeft(t.getName());
 			LyricChecker lc = new LyricChecker(t.getName(), t.getArtist(), bw, qw);
 			lc.checkLyrics();
@@ -103,7 +103,7 @@ public class SpotifyGUI extends JFrame implements KeyListener {
 			out += "\r\n";
 			return out;
 		} catch (IOException e) {
-			return MenuGUI.makeLevelLeft(id)+MenuGUI.makeLevelRight("[Failed]")+"\r\n";
+			return MenuGUI.makeLevelLeft(id)+MenuGUI.makeLevelRight("[IO Failed]")+"\r\n";
 		}
 	}
 
