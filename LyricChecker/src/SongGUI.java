@@ -68,7 +68,7 @@ public class SongGUI implements KeyListener
     p.add(pane);
     
     as.add(p);
-    as.setSize(400,245);
+    as.setSize(400,280);
     as.setLocationRelativeTo(null);
     as.setVisible(true);  
   }
@@ -88,23 +88,27 @@ public class SongGUI implements KeyListener
   {
     output.setText("");
     Track t = null;
-    try {
+    try 
+    {
       t = MusixMatch.trackSearch(songField.getText(), artistField.getText());
-    } catch (IOException e) {
+    } 
+    catch (IOException e) 
+    {
       output.setBackground(Color.WHITE);
-	  output.append("No such song.");
-	  return;
+      output.append("No such song.");
+      return;
     }
-    if (t == null) {
+    if (t == null)
+    {
       output.setBackground(Color.WHITE);
-  	  output.append("No such song.");
-  	  return;    	
+      output.append("No such song.");
+      return;     
     }
     LyricChecker l = new LyricChecker(t.getName(), t.getArtist(), badWords, qWords);
     l.checkLyrics();
     if(!l.lookupFailed())
     {
-      output.setText("Expletives:\r\n"+l.foundBadWords()+"\r\n\r\n"+"Possible expletives:\r\n"+l.foundQWords());
+      output.setText(t.getName()+" by "+t.getArtist()+"\n\n"+"Expletives:\r\n"+l.foundBadWords()+"\r\n\r\n"+"Possible expletives:\r\n"+l.foundQWords());
       if(!l.hasBadWords() && !l.hasQWords())
         output.setBackground(Color.GREEN);
       else if(l.hasQWords() && !l.hasBadWords())
@@ -114,14 +118,18 @@ public class SongGUI implements KeyListener
     }
     else
     {
-      if (t.isExplicit()) {
-    	  output.setBackground(Color.RED);
-    	  output.setText("No lyrics found, MusixMatch marked as explicit: "+t.getName()+".");
-      } else {
-    	  output.setBackground(Color.GREEN);
-    	  output.setText("No lyrics found, MusixMatch marked as clean: "+t.getName()+".");
+      if (t.isExplicit()) 
+      {
+        output.setBackground(Color.RED);
+        output.setText("No lyrics found from Metrolyrics.\n\nMusixMatch has marked "+t.getName() + " by " +t.getArtist() +" as explicit.");
+      } 
+      else 
+      {
+        output.setBackground(Color.GREEN);
+        output.setText("No lyrics found from Metrolyrics.\nMusixMatch has marked "+t.getName()+" by "+t.getArtist()+" as clean.");
       }
     }
+    
   }
   
   public void keyTyped(KeyEvent e) {}
