@@ -49,7 +49,7 @@ public class LyricChecker {
    try {
      String html = URLConnectionReader.getText("http://www.metrolyrics.com/printlyric/"+processMetro(song)+"-lyrics-"+processMetro(artist)+".html");
      Scanner scan = new Scanner(html);
-     scan.useDelimiter("<p class=\"lyrics-body\"><p class='verse'>");
+     scan.useDelimiter("<p class='verse'>");
      scan.next();
      scan.useDelimiter("</div>");
      String lookedup = scan.next();
@@ -75,7 +75,7 @@ public class LyricChecker {
   str = str.replaceAll(" - ","-");
   str = str.toLowerCase();
   str = str.replaceAll("\\s","-");
-  int feat = str.indexOf("-feat");
+  int feat = str.indexOf("-feat\\S*");
   if(feat > 0)
     str = str.substring(0, feat);
   return str;
