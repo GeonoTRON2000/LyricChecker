@@ -24,12 +24,12 @@ public class ListGUI implements KeyListener
     bad.setAlignmentX(Component.CENTER_ALIGNMENT);
     p.add(bad);
     
-    badAdd = new JTextField(30);
+    badAdd = new JTextField("Add:", 30);
     badAdd.setMaximumSize(badAdd.getPreferredSize());
     p.add(badAdd);
     badAdd.addKeyListener(this);
     
-    badRemove = new JTextField(30);
+    badRemove = new JTextField("Remove:", 30);
     badRemove.setMaximumSize(badRemove.getPreferredSize());
     p.add(badRemove);
     badRemove.addKeyListener(this);
@@ -41,12 +41,12 @@ public class ListGUI implements KeyListener
     q.setAlignmentX(Component.CENTER_ALIGNMENT);
     p.add(q);
     
-    qAdd = new JTextField(30);
+    qAdd = new JTextField("Add:",30);
     qAdd.setMaximumSize(qAdd.getPreferredSize());
     p.add(qAdd);
     qAdd.addKeyListener(this);
     
-    qRemove = new JTextField(30);
+    qRemove = new JTextField("Remove:",30);
     qRemove.setMaximumSize(qRemove.getPreferredSize());
     p.add(qRemove);
     qRemove.addKeyListener(this);
@@ -80,9 +80,9 @@ public class ListGUI implements KeyListener
     if (key == KeyEvent.VK_ENTER) 
     { 
       output.setBackground(Color.WHITE);
-      
-      badAdd.requestFocusInWindow();
-      badAdd.selectAll();
+      if(!badAdd.getText().equals(null))
+      { }
+        
     }
   }
   public static void main(String[] args)
