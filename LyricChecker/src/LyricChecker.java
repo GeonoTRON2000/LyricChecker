@@ -4,6 +4,7 @@ import java.util.Scanner;
 import musixmatch.URLConnectionReader;
 
 public class LyricChecker {
+<<<<<<< Updated upstream
  private String name;
  private String artist;
  private ArrayList<String> bwc;
@@ -80,6 +81,59 @@ public class LyricChecker {
     str = str.substring(0, feat);
   return str;
  }
+<<<<<<< Updated upstream
+=======
+=======
+	private Track track;
+	private ArrayList<String> bwc;
+	private ArrayList<String> qwc;
+	private ArrayList<String> bw;
+	private ArrayList<String> qw;
+	
+	//parameters: song, all bad words, all questionable words
+	public LyricChecker (Track t, ArrayList<String> bWords, ArrayList<String> qWords) {
+		track = t;
+		bw = bWords;
+		qw = qWords;
+		bwc = new ArrayList<String>();
+		qwc = new ArrayList<String>();
+	}
+
+	//finds bad and questionable words in lyrics
+	public void checkLyrics () {
+		String lyrics = track.getLyrics().toLowerCase();
+		for(int i = 0; i < bw.size(); i++) {
+			String cbw = bw.get(i);
+			if (!bwc.contains(cbw)) {
+				if (lyrics.indexOf(cbw) > -1) bwc.add(cbw);
+			}
+		}
+		for (int i = 0; i < qw.size(); i++) {
+			String cqw = qw.get(i);
+			if (!qwc.contains(cqw)) {
+				if (lyrics.indexOf(cqw) > -1) qwc.add(cqw);
+			}
+		}
+	}
+>>>>>>> Stashed changes
+
+
+ public void addBWord(String s) {
+  bw.add(s.toLowerCase());
+ }
+
+ public void removeBWord(String s) {
+  bw.remove(s.toLowerCase());
+ }
+
+ public void addQWord(String s) {
+  qw.add(s.toLowerCase());
+ }
+
+ public void removeQWord(String s) {
+  qw.remove(s.toLowerCase());
+ }
+>>>>>>> Stashed changes
  
  public ArrayList<String> foundBadWords () {
   return bwc;

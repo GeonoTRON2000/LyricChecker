@@ -24,7 +24,7 @@ public class MenuGUI extends JPanel
     label.setAlignmentX(Component.CENTER_ALIGNMENT);
     label.setBorder(BorderFactory.createTitledBorder("4.20"));
     
-    panel.add(Box.createRigidArea(new Dimension(0,32)));
+    panel.add(Box.createRigidArea(new Dimension(0,35)));
     
     panel.add(label);
     
@@ -41,7 +41,7 @@ public class MenuGUI extends JPanel
     panel.add(button1);
     button1.setFocusPainted(false);
     
-    panel.add(Box.createRigidArea(new Dimension(0,35)));
+    panel.add(Box.createRigidArea(new Dimension(0,15)));
     
     JButton button2 = new JButton("Check by Artist/Album");
     button2.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -53,7 +53,7 @@ public class MenuGUI extends JPanel
     });   
     panel.add(button2);
     
-    panel.add(Box.createRigidArea(new Dimension(0,35)));
+    panel.add(Box.createRigidArea(new Dimension(0,15)));
     
     JButton button3 = new JButton("Check by Spotify URI");
     button3.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -65,7 +65,7 @@ public class MenuGUI extends JPanel
     });
     panel.add(button3);
     
-    panel.add(Box.createRigidArea(new Dimension(0,35)));
+    panel.add(Box.createRigidArea(new Dimension(0,15)));
     
     JButton button4 = new JButton("View/Edit Expletive List");
     button4.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -76,6 +76,17 @@ public class MenuGUI extends JPanel
      }
     });
     panel.add(button4);
+    
+    JButton abt = new JButton("?");
+    abt.setAlignmentX(Component.CENTER_ALIGNMENT);
+    abt.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e)
+        {
+            new AboutGUI();
+        }
+    });
+    panel.add(Box.createRigidArea(new Dimension(0,15)));
+    panel.add(abt);
     
     panel.add(Box.createRigidArea(new Dimension(0,25)));
     
