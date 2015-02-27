@@ -1,19 +1,13 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MenuGUI extends JPanel
 {
   private static final long serialVersionUID = 4552711288895606017L;
-  private ArrayList<String> badWords;
-  private ArrayList<String> qWords;
   
   public MenuGUI()
   {
-    badWords = new ArrayList<String>(Arrays.asList("asshole","bitch","cocksucker","cunt","dick","fuck","nigga","nigger","piss","pussy","shit"));
-    qWords = new ArrayList<String>(Arrays.asList(" ass ","bastard","damn","hell","sex"));
     JFrame frame;
 
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -41,7 +35,7 @@ public class MenuGUI extends JPanel
     button1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
-       new SongGUI(badWords, qWords);
+       new SongGUI(BadWords.getBadWords(), BadWords.getQWords());
       }
     });   
     panel.add(button1);
@@ -54,7 +48,7 @@ public class MenuGUI extends JPanel
     button2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
-        new AlbumGUI(badWords, qWords);
+        new AlbumGUI(BadWords.getBadWords(), BadWords.getQWords());
       }
     });   
     panel.add(button2);
@@ -66,7 +60,7 @@ public class MenuGUI extends JPanel
     button3.addActionListener(new ActionListener() {
      public void actionPerformed(ActionEvent e)
      {
-      new SpotifyGUI(badWords, qWords).setVisible(true);
+      new SpotifyGUI(BadWords.getBadWords(), BadWords.getQWords()).setVisible(true);
      }
     });
     panel.add(button3);
@@ -126,33 +120,10 @@ public class MenuGUI extends JPanel
     }
     return str;
   }
-  
-  public void addBWord(String s) {
-    badWords.add(s.toLowerCase());
-  }
-  
-  public void removeBWord(String s) {
-    badWords.remove(s.toLowerCase());
-  }
-  
-  public void addQWord(String s) {
-    qWords.add(s.toLowerCase());
-  }
-  
-  public void removeQWord(String s) {
-    qWords.remove(s.toLowerCase());
-  }
-  
-  public ArrayList<String> getBWords() {
-    return badWords;
-  }
-  
-  public ArrayList<String> getQWords() {
-    return qWords;
-  }
-  
+    
   public static void main(String[] args)
   {
     new MenuGUI();
   }
+  
 }

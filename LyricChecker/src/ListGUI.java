@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class ListGUI implements KeyListener
 {
@@ -76,13 +75,22 @@ public class ListGUI implements KeyListener
   
   public void keyPressed(KeyEvent e) 
   {
-    int key = e.getKeyCode();
-    if (key == KeyEvent.VK_ENTER) 
-    { 
-      output.setBackground(Color.WHITE);
-      if(!badAdd.getText().equals(null))
-      { }
-        
+    if (e.getKeyCode() == KeyEvent.VK_ENTER) 
+    {
+      if (e.getSource() == badAdd) {
+    	  String tba = badAdd.getText().toLowerCase();
+    	  if (!BadWords.getBadWords().contains(tba)) BadWords.getBadWords().add(tba);
+      } else if (e.getSource() == badRemove) {
+    	  String tbr = badRemove.getText().toLowerCase();
+    	  if (!BadWords.getBadWords().contains(tbr)) BadWords.getBadWords().remove(tbr);
+      } else if (e.getSource() == qAdd) {
+    	  String tqa = qAdd.getText();
+    	  if (!BadWords.getQWords().contains(tqa)) BadWords.getQWords().add(tqa);
+      } else if (e.getSource() == qRemove) {
+    	  String tqr = qRemove.getText();
+    	  if (!BadWords.getQWords().contains(tqr)) BadWords.getQWords().remove(tqr);
+      }
+      output.setText("Bad Words: "+BadWords.getBadWords()+"\r\nQuestionable Words: "+BadWords.getQWords()+"\r\n");
     }
   }
   public static void main(String[] args)
