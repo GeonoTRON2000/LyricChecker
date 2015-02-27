@@ -10,39 +10,40 @@ public class AboutGUI extends JPanel
         
         JPanel about = new JPanel();
         about.setLayout(new BoxLayout(about, BoxLayout.Y_AXIS));
-        about.setBorder(BorderFactory.createEmptyBorder(6, 10, 10, 10));
+        about.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
-        about.add(Box.createRigidArea(new Dimension(0,32)));
+        about.add(Box.createRigidArea(new Dimension(0,15)));
         
-        JLabel label = new JLabel("About");
-        label.setFont(label.getFont ().deriveFont (24.0f));
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
-        about.add(label);
-        
-        String instructions = "\n1. Input Artist and Song/Album\n\n" +
-        "2. Press Enter\n\n" + 
-        "3. Returns Explicit, Clean or Questionable";
-        
-        JTextPane ins= new JTextPane();
-        ins.setText(instructions);
-        ins.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        about.add(Box.createRigidArea(new Dimension(0,32)));
-        about.add(ins);
-        
-        JLabel creators = new JLabel("Carson Fleming, Brandon Liu, Marshall Vail");
+//        JLabel label = new JLabel("About");
+//        label.setFont(label.getFont ().deriveFont (24.0f));
+//        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        about.add(label);
+//        about.add(Box.createRigidArea(new Dimension(0,15)));
+      
+        JLabel creators = new JLabel("CSC420 Design Project by: ");
         creators.setAlignmentX(Component.CENTER_ALIGNMENT);
-        creators.setFont(creators.getFont ().deriveFont (10.0f));
-        about.add(Box.createRigidArea(new Dimension(0,32)));
         about.add(creators);
+        //creators.setFont(creators.getFont ().deriveFont (10.0f));
+        //about.add(Box.createRigidArea(new Dimension(0,5)));
         
-        JLabel credz = new JLabel("Credits: MusixMatch, Metrolyrics");
+        JLabel creators1 = new JLabel("Brandon Liu, Carson Fleming, Marshall Vail");
+        creators1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //creators.setFont(creators.getFont ().deriveFont (10.0f));
+        //about.add(Box.createRigidArea(new Dimension(0,15)));
+        about.add(creators1);
+        
+        JLabel credz = new JLabel("Info and lyrics provided by MusixMatch and Metrolyrics");
         credz.setAlignmentX(Component.CENTER_ALIGNMENT);
-        about.add(Box.createRigidArea(new Dimension(0,32)));
+        about.add(Box.createRigidArea(new Dimension(0,15)));
         about.add(credz);
         
+        JLabel j = new JLabel("\"Built with WPEA 90.5 in mind\" -Brandon");
+        j.setAlignmentX(Component.CENTER_ALIGNMENT);
+        about.add(Box.createRigidArea(new Dimension(0,15)));
+        about.add(j);
+        
         f.add(about);
-        f.setSize(300,360);
+        f.setSize(400,170);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLocationRelativeTo(null);
         f.setVisible(true);

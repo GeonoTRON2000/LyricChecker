@@ -77,7 +77,7 @@ public class MenuGUI extends JPanel
     });
     panel.add(button4);
 
-    JButton abt = new JButton("?");
+    JButton abt = new JButton("About");
     abt.setAlignmentX(Component.CENTER_ALIGNMENT);
     abt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e)
@@ -88,15 +88,8 @@ public class MenuGUI extends JPanel
     panel.add(Box.createRigidArea(new Dimension(0,15)));
     panel.add(abt);
     
-    panel.add(Box.createRigidArea(new Dimension(0,25)));
-    
-    JLabel credits = new JLabel("Brandon Liu, Carson Fleming, Marshall Vail");
-    credits.setFont(label.getFont ().deriveFont (10.0f));
-    credits.setAlignmentX(Component.CENTER_ALIGNMENT);
-    panel.add(credits);
-    
     frame.add(panel);
-    frame.setSize(300,420);
+    frame.setSize(420-120,420-40);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
