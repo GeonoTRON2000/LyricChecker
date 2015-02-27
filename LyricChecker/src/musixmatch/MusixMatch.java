@@ -16,7 +16,6 @@ public class MusixMatch {
   String feedback = URLConnectionReader.getText(api_base+url);
   JSONParser p = new JSONParser(feedback);
   JSONObject message = p.object().getObject("message");
-  System.out.println(message);
   JSONNumber status = message.getObject("header").getNumber("status_code");
   if (status.getValue() != 200) throw new MusixMatchException("API lookup did not return successfully: "+(int)status.getValue()+".");
   return message.getObject("body");

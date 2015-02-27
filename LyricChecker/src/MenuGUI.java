@@ -13,7 +13,6 @@ public class MenuGUI extends JPanel
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     
     frame = new JFrame("Lyrics Checker");
-    frame.setTitle("Lyrics Checker 4.20");
     
     JPanel panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -22,7 +21,7 @@ public class MenuGUI extends JPanel
     JLabel label = new JLabel("Lyrics Checker");
     label.setFont(label.getFont ().deriveFont (24.0f));
     label.setAlignmentX(Component.CENTER_ALIGNMENT);
-    label.setBorder(BorderFactory.createTitledBorder("4.20"));
+    label.setBorder(BorderFactory.createTitledBorder("1.0"));
     
     panel.add(Box.createRigidArea(new Dimension(0,32)));
     

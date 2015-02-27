@@ -63,12 +63,13 @@ public class ListGUI implements KeyListener
     output.setLineWrap(true);
     output.setWrapStyleWord(true);
     output.setEditable(false);
+    output.setText("Bad Words: "+BadWords.getBadWords()+"\r\n\nQuestionable Words: "+BadWords.getQWords()+"\r\n");
     JScrollPane pane = new JScrollPane();
     pane.getViewport().add(output);
     p.add(pane);
     
     as.add(p);
-    as.setSize(400,345);
+    as.setSize(400,315);
     as.setLocationRelativeTo(null);
     as.setVisible(true);  
   }
@@ -78,19 +79,19 @@ public class ListGUI implements KeyListener
     if (e.getKeyCode() == KeyEvent.VK_ENTER) 
     {
       if (e.getSource() == badAdd) {
-    	  String tba = badAdd.getText().toLowerCase();
-    	  if (!BadWords.getBadWords().contains(tba)) BadWords.getBadWords().add(tba);
+       String tba = badAdd.getText().toLowerCase();
+       if (!BadWords.getBadWords().contains(tba)) BadWords.getBadWords().add(tba);
       } else if (e.getSource() == badRemove) {
-    	  String tbr = badRemove.getText().toLowerCase();
-    	  if (!BadWords.getBadWords().contains(tbr)) BadWords.getBadWords().remove(tbr);
+       String tbr = badRemove.getText().toLowerCase();
+       if (BadWords.getBadWords().contains(tbr)) BadWords.getBadWords().remove(tbr);
       } else if (e.getSource() == qAdd) {
-    	  String tqa = qAdd.getText();
-    	  if (!BadWords.getQWords().contains(tqa)) BadWords.getQWords().add(tqa);
+       String tqa = qAdd.getText();
+       if (!BadWords.getQWords().contains(tqa)) BadWords.getQWords().add(tqa);
       } else if (e.getSource() == qRemove) {
-    	  String tqr = qRemove.getText();
-    	  if (!BadWords.getQWords().contains(tqr)) BadWords.getQWords().remove(tqr);
+       String tqr = qRemove.getText();
+       if (BadWords.getQWords().contains(tqr)) BadWords.getQWords().remove(tqr);
       }
-      output.setText("Bad Words: "+BadWords.getBadWords()+"\r\nQuestionable Words: "+BadWords.getQWords()+"\r\n");
+      output.setText("Bad Words: "+BadWords.getBadWords()+"\r\n\nQuestionable Words: "+BadWords.getQWords()+"\r\n");
     }
   }
   public static void main(String[] args)
