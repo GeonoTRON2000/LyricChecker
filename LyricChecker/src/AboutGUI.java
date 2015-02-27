@@ -20,7 +20,7 @@ public class AboutGUI extends JPanel
         
         about.add(label);
         
-        String instructions = "1. Input Artist and Song/Album\n\n" +
+        String instructions = "\n1. Input Artist and Song/Album\n\n" +
         "2. Press Enter\n\n" + 
         "3. Returns Explicit, Clean or Questionable";
         
@@ -30,13 +30,13 @@ public class AboutGUI extends JPanel
         about.add(Box.createRigidArea(new Dimension(0,32)));
         about.add(ins);
         
-        JLabel creators = new JLabel("Creators: Carson Fleming, Brandon Liu, Marshall Vail");
+        JLabel creators = new JLabel("Carson Fleming, Brandon Liu, Marshall Vail");
         creators.setAlignmentX(Component.CENTER_ALIGNMENT);
         creators.setFont(creators.getFont ().deriveFont (10.0f));
         about.add(Box.createRigidArea(new Dimension(0,32)));
         about.add(creators);
         
-        JLabel credz = new JLabel("Credits: MusixMatch");
+        JLabel credz = new JLabel("Credits: MusixMatch, Metrolyrics");
         credz.setAlignmentX(Component.CENTER_ALIGNMENT);
         about.add(Box.createRigidArea(new Dimension(0,32)));
         about.add(credz);
