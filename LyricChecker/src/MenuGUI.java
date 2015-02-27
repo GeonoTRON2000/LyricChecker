@@ -71,15 +71,17 @@ public class MenuGUI extends JPanel
     });
     panel.add(button3);
     
+    panel.add(Box.createRigidArea(new Dimension(0,35)));
+    
     JButton button4 = new JButton("View/Edit Expletive List");
     button4.setAlignmentX(Component.CENTER_ALIGNMENT);
     button4.addActionListener(new ActionListener() {
      public void actionPerformed(ActionEvent e)
      {
-      new SpotifyGUI(badWords, qWords).setVisible(true);
+      new ListGUI(); 
      }
     });
-    panel.add(button3);
+    panel.add(button4);
     
     panel.add(Box.createRigidArea(new Dimension(0,25)));
     
@@ -89,7 +91,7 @@ public class MenuGUI extends JPanel
     panel.add(credits);
     
     frame.add(panel);
-    frame.setSize(300,360);
+    frame.setSize(300,420);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
@@ -139,6 +141,14 @@ public class MenuGUI extends JPanel
   
   public void removeQWord(String s) {
     qWords.remove(s.toLowerCase());
+  }
+  
+  public ArrayList<String> getBWords() {
+    return badWords;
+  }
+  
+  public ArrayList<String> getQWords() {
+    return qWords;
   }
   
   public static void main(String[] args)
