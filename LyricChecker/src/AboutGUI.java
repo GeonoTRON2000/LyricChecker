@@ -46,7 +46,7 @@ public class AboutGUI extends JPanel
         about.add(Box.createRigidArea(new Dimension(0,15)));
         about.add(j);
         
-        JLabel n = new JLabel("                     Ñ Brandon :)");
+        JLabel n = new JLabel("                   -Brandon :)");
         n.setAlignmentX(Component.CENTER_ALIGNMENT);
         about.add(n);
         
