@@ -94,15 +94,15 @@ public class MenuGUI extends JPanel
     frame.setVisible(true);
   }
  
-  public static String makeLevelLeft(String str) //make string 35 characters by truncating or adding spaces
+  public static String makeLevelLeft(String str) //make string 42 characters by truncating or adding spaces
   {
-    if(str.length() > 35)
+    if(str.length() > 42)
     {
-      str = str.substring(0, 31) + "... ";
+      str = str.substring(0, 38) + "... ";
     }
     else
     {
-      while(str.length() < 35)
+      while(str.length() < 42)
         str += ' ';
     }
     return str;
